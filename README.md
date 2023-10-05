@@ -1,7 +1,7 @@
 # Plataforma de seguimiento de errores
 
 ### Requisitos previos:
-Se debe tener instalado o instalar postgresql.
+Se debe tener instalado o instalar Postgresql.
 
 Se recomienda crear y ejecutar todo el código en un ambiente virtual, este se puede crear con:
 <br>
