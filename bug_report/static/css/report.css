@@ -1,0 +1,281 @@
+.container-form {
+  text-align: center;
+}
+
+.container-form .card {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 700px;
+  background-color: var(--sidebar-color);
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.25);
+  padding: 0.75rem;
+}
+
+.container-form .card-image {
+  border-radius: 8px;
+  overflow: hidden;
+  padding-bottom: 30%;
+  background-image: url("https://assets.codepen.io/285131/coffee_1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 0 30%;
+  position: relative;
+}
+
+.container-form .card-heading {
+  position: absolute;
+  left: 10%;
+  top: 15%;
+  right: 10%;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #735400;
+  line-height: 1.222;
+}
+
+.container-form .card-heading small {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 400;
+  margin-top: 0.25em;
+}
+
+.container-form form[method="post"] {
+  padding: 0.5rem 1rem 0;
+}
+
+.input#tittle {
+  height: 90px;
+}
+.input {
+  display: flex;
+  flex-direction: column-reverse;
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+.input .p {
+  height: auto;
+}
+
+.input + .input {
+  /* margin-top: 1rem; */
+  /* margin-bottom: 1rem; */
+}
+
+input[name="imagenes"] {
+  margin-top: 1rem;
+}
+
+.input#userEmail {
+  height: 70px;
+  margin-top: 12px;
+}
+
+.input-label {
+  display: block;
+  color: var(--text-color);
+  position: absolute;
+  top: 1rem;
+  transition: 0.25s ease;
+}
+
+.input-field {
+  border: 0;
+  z-index: 1;
+  background-color: transparent;
+  border-bottom: 2px solid #eee;
+  font: inherit;
+  font-size: 1.125rem;
+  padding: 0.25rem 0;
+}
+
+.input-field:focus,
+.input-field:valid {
+  outline: 0;
+  border-bottom-color: #6658d3;
+}
+
+.input-field:focus + .input-label,
+.input-field:valid + .input-label {
+  color: #6658d3;
+  transform: translateY(-1.5rem);
+}
+
+.action {
+  margin-top: 1rem;
+}
+
+.action button,#buttonSubmit{
+  font-size: 1.25rem;
+
+  padding: 1em;
+
+  width: 100%;
+
+  font-weight: 500;
+
+  background-color: var(--body-color);
+
+  border-radius: 6px;
+
+  border-color: var(--primary-color);
+
+  border-width: 10px;
+
+  color: var(--text-color);
+
+  border: 0;
+}
+
+.action button[type="submit"]:focus {
+  outline: 0;
+}
+
+.action button[type="submit"]:hover {
+  background-color: var(--title-color);
+  color: white;
+  transition: var(--tran-03);
+}
+
+.card-info {
+  padding: 1rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #8597a3;
+}
+
+.card-info a {
+  display: block;
+  color: #6658d3;
+  font-weight: bold;
+  
+}
+
+.input textarea[name="titulo"] {
+  height: 40px;
+}
+.input textarea[name="reporte"] {
+  height: 140px;
+}
+
+.input#project {
+  margin-top: 5rem;
+  height: 65px;
+}
+
+.input textarea {
+  /* margin-top: 2em; */
+  width: 100%;
+  border: 0.5px solid #cccccc;
+  padding: 5px;
+  font-family: "Segoe UI";
+  color-scheme: var(--text-color);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--body-color);
+  color: var(--text-color);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.input p {
+  height: 60px;
+  margin-top: 20px;
+}
+
+.input input {
+  /* margin-top: 3em; */
+
+  border: 0.5px solid #cccccc;
+
+  background-color: var(--body-color);
+
+  color-scheme: var(--text-color);
+
+  color: var(--text-color);
+
+  border-radius: 6px;
+
+  width: 100%;
+
+  height: 30px;
+
+  padding: 5px;
+
+  text-align: center;
+}
+
+.input select {
+  margin-top: 2em;
+  width: 100%;
+  height: 25px;
+  border-radius: 6px;
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+.input label[for="id_correo_usuario"] {
+  display: none;
+}
+
+.input label[for="id_email"] {
+  display: none;
+}
+
+.input label[for="id_reporte"] {
+  display: none;
+}
+
+.input label[for="id_nombre_proyecto"] {
+  display: none;
+}
+
+.input label[for="id_titulo"] {
+  display: none;
+}
+
+.input label[for="id_imagenes"] {
+  display: none;
+}
+
+.modal {
+  display: none; /* Ocultar el modal de forma predeterminada */
+  position: fixed; /* Posición fija para que aparezca en la ventana del navegador */
+  z-index: 9999; /* Z-index alto para asegurar que el modal esté en la parte superior */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Habilitar desplazamiento si el contenido del modal es demasiado largo */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+}
+
+/* Estilos del contenido del modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* Centrar verticalmente y dejar espacio en los bordes */
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 600px; /* Ancho máximo del modal */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para el botón de cierre */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}

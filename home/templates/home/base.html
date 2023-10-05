@@ -1,0 +1,150 @@
+
+{%load static%}
+{%load humanize%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href='{%static "css/style.css"%}'>
+    
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+    <title>Inicio</title> 
+</head>
+<body>
+    <nav class="sidebar close hide">
+        
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src={%static "images/logo.png"%} alt="">
+                </span>
+
+                <div class="text logo-text">
+                    {%if request.user.is_authenticated%}
+                        <span class="name">{{user.username | title}}</span>
+                    {%else%}
+                        <span class="name">Invitado</span>
+                    {%endif%}
+                    <span class="name">Bugtracking</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+
+                <!-- <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Search...">
+                </li> -->
+
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="{% url 'home:principal' %}">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Inicio</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-link">
+                        <a href="{% url 'buglist:bug_list' %}">
+                            <i class='bx bx-list-ul icon'></i>
+                            <span class="text nav-text">Lista de bugs</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url 'report:reportar_bug' %}">
+                            <i class='bx bx-bug icon' ></i>
+                            <span class="text nav-text">Reportar bug</span>
+                        </a>
+                    </li>
+
+                    <!-- <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-pie-chart-alt icon' ></i>
+                            <span class="text nav-text">Analytics</span>
+                        </a>
+                    </li> -->
+
+                    <!-- <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-heart icon' ></i>
+                            <span class="text nav-text">Likes</span>
+                        </a>
+                    </li> -->
+
+                    <!-- <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">Wallets</span>
+                        </a>
+                    </li> -->
+
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                {% if user.is_superuser %}
+                    <li class="nav-link">
+                        <a href="{% url 'admin:index' %}">
+                            <i class='bx bx-cog icon' ></i>
+                            <span class="text nav-text">Administrar</span>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="login-button">
+                    {%if request.user.is_authenticated%}
+                        <a href="{% url 'home:exit' %}">
+                            <i class='bx bx-log-out icon' ></i>
+                            <span class="text nav-text">Cerrar sesión</span>
+                        </a>
+                    {%else%}
+                        <a href="login">
+                            <i class='bx bx-log-in icon' ></i>
+                            <span class="text nav-text">Iniciar sesión</span>
+                        </a>
+                        
+                    {%endif%}
+                </li>
+
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Modo oscuro</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                
+            </div>
+        </div>
+    </nav>
+
+    <section class="home" id="home">
+        <i class='bx bx-menu toggle'></i>
+    </section>
+
+    {% block content%}
+    {% endblock %}
+
+    <script src={%static "js/script.js" %}></script>
+    
+    
+    </body>
+
+
+
+</body>
+</html>

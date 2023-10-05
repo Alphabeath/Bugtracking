@@ -1,0 +1,86 @@
+{% extends 'home/base.html' %} {%load static%} {% block content %}
+
+<link rel="stylesheet" href='{%static "css/report.css"%}'>
+<div id="formularioEnviadoValue" data-formulario-enviado="{{ formularioEnviado|default:'false' }}"></div>
+<script src="{% static 'js/report.js' %}"></script>
+
+
+<section class="home">
+  <div class="container-form">
+    <!-- code here -->
+
+    <div class="text">Reportar un error</div>
+    <div class="card">
+      <div class="card-image">
+        <h2 class="card-heading">
+          Comencemos!
+          <small>Para reportar el error completa los campos</small>
+        </h2>
+      </div>
+      <form id="myForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input" id="tittle">
+          <label class="input-label">Resumen del problema</label>
+          {{ form_resumen.as_p }}
+          
+        </div>
+        <div class="input" id="description">
+          {{ form_bug.as_p }}
+          <label class="input-label">Descripción del problema</label>
+        </div>
+        <!-- <div class="input" id="userEmail">
+          {{ form_usuario.as_p }}
+          <label class="input-label">Email</label>
+        </div> -->
+        <div class="input" id="project">
+          {{ form_proyecto.as_p }}
+          <label class="input-label">Proyecto ascociado</label>
+        </div>
+        <div class="input" id="reportImage">
+          {{ form_imagen.as_p }}
+          <label class="input-label">Imagen</label>
+        </div>
+        <div class="action">
+          {%if request.user.is_authenticated%}
+          <button id="submitButton" type="submit">Enviar reporte</button>
+          {%else%}
+          <button type="reset">No estás registrado</button>
+          {%endif%}
+          
+        </div>
+      </form>
+      <div class="card-info">
+        {%if request.user.is_authenticated%}
+          <a>Recuerda ser lo más específico posible para que podamos replicar el error</a>
+        {%else%}
+        <p>
+          <p>
+            Registrándote podrás tener más información sobre tus reportes
+            <a href="{% url 'home:signup' %}">Registrarme ahora</a>
+          </p>
+          
+        </p>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Reporte enviado</h2>
+        <span id="closeModalButton" class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>
+          Tu reporte ha sido enviado con éxito.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <a href="{% url 'home:principal' %}">Volver al inicio</a>
+        <a href="{% url 'report:reportar_bug' %}">Enviar otro reporte</a>
+      </div>
+  </div>
+
+{% endblock %}

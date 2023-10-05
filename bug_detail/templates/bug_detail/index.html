@@ -1,0 +1,307 @@
+{%extends 'home/base.html'%}
+{% load static %}
+{% load humanize %}  
+{% block content %} 
+
+<link rel="stylesheet" href='{%static "css/detail.css"%}'>
+
+
+<section class="home">
+
+  <div class="modulo">
+    <div class="container">
+      <div class="contenido">
+        <span class="text-1">
+          Bug {{ bug.id_bug }}
+        </span>
+        <span class="text-2">
+          Creado {{ bug.fecha_reporte | naturaltime }}
+        </span>
+        <span class="text-2">
+          {% if avance %}
+          Actualizado {{ avance.first.fecha_avance | naturaltime }}
+          {% else %}
+          Sin cambios
+          {% endif %}
+        </span>
+      </div>
+  
+      <div class="titulo">
+        <h3 class="titulo-1">
+          {{ bug.titulo }}
+        </h3>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modulo">
+    <div class="container">
+      <div class="info">
+        <div class="item">
+          <span class="text-2">
+            Proyecto:
+          </span>
+          <span class="text-1">
+            {{ proyecto.nombre_proyecto }}
+          </span>
+        </div>
+  
+        <div class="item">
+          <span class="text-2">
+            Programador:
+          </span>
+          <span class="text-1">
+            {{ programador.username }}
+          </span>
+        </div>
+  
+        <div class="item">
+          <span class="text-2">
+            Estado:
+          </span>
+          <span class="text-1">
+            {%if bug.estado == "('ASIGNADO', 'bug recien asignado')"%}
+                <td><span class="status process">Asignado</span></td>
+              {%endif%}
+              {%if bug.estado == "('SOLUCIONADO', 'bug solucionado')"%}
+                <td><span class="status completed">Solucionado</span></td>
+              {%endif%}
+              {%if bug.estado == "('EN PROCESO', 'bug esta proceso de revisión')"%}
+                <td><span class="status pending">En proceso</span></td>
+              {%endif%}
+          </span>
+        </div>
+  
+        <div class="item">
+          <span class="text-2">
+            Prioridad:
+          </span>
+          <span class="text-1">
+            {%if bug.prioridad == "('BAJA', 'bug de baja prioridad')"%}
+                <td><span class="status process">Baja</span></td>
+              {%endif%}
+              {%if bug.prioridad == "('MEDIA', 'bug de media prioridad')"%}
+                <td><span class="status completed">Media</span></td>
+              {%endif%}
+              {%if bug.prioridad == "('ALTA', 'bug de alta prioridad')"%}
+                <td><span class="status pending">Alta</span></td>
+              {%endif%}
+              {%if bug.prioridad == "('URGENTE', 'bug de urgente prioridad')"%}
+                <td><span class="status pending">Urgente</span></td>
+              {%endif%}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <div class="modulo">
+    <div class="container">
+      <div class="descripcion">
+        <span class="text-2">
+          Descripción
+        </span>
+        <p class="text-1">
+          {{ bug.descripcion }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-2 titulo">Reportes</h3>
+
+  <div class="modulo">
+    {% if avance %}
+      {% for Avance in avance %}
+        <div class="cambio container">
+          <div class="id-fecha">
+            <span class="text-1">
+              Reporte {{ Avance.id_avance }}
+            </span>
+            <span class="text-2 fecha">
+              {{ Avance.fecha_avance | naturaltime }}
+            </span>
+          </div>
+          <hr class="separador">
+          <p class="text-2">
+            {{ Avance.titulo }}
+          </p>
+          <hr class="separador">
+          <p class="text-1 descripcion">
+            {{ Avance.descripcion }}
+          </p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="container cambio">
+        <span class="text-2">
+          Sin reportes
+        </span>
+      </div>
+    {% endif %}
+  </div>
+  
+  <h3 class="text-2 titulo">Tickets</h3>
+  
+  <div class="modulo">
+    {% if reporte %}
+      {% for Reporte  in reporte %}
+        <div class="reporte container">
+          <div class="id-fecha">
+            <span class="text-1">
+              Ticket {{ Reporte.id_reporte }}
+            </span>
+            <span class="text-2 subido">
+              Subido por:
+            </span>
+            <span class="text-usuario">
+              {{ Reporte.id_usuario.user.username }}
+            </span>
+            <span class="text-2 fecha">
+              {{ Reporte.fecha_reporte | naturaltime }}
+            </span>
+          </div>
+          <hr class="separador">
+          <p class="text-2">
+            {{ Reporte.titulo }}
+          </p>
+          <hr class="separador">
+          <p class="text-1 descripcion">
+            {{ Reporte.reporte }}
+          </p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="container reporte">
+        <span class="text-2">
+          Sin tickets
+        </span>
+      </div>
+    {% endif %}
+  </div>
+  
+  
+  
+
+  <h3 class="text-2 titulo">Imagenes</h3>
+
+  <div class="modulo">
+    {% if imagen %}
+    <div class="container">
+      <div class="contenido">
+        {% for Imagen in imagen %}
+        <div class="item">
+          <div class="card">
+            <img src="{{ Imagen.imagen.url }}" class="card-img-top" alt="{{ Imagen.imagen }}">
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="container">
+      <span class="text-2">No hay imágenes disponibles</span>
+    </div>
+    {% endif %}
+  
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <img id="img01" class="modal-img">
+        <div id="caption" class="modal-caption"></div>
+      </div>
+    </div>
+  </div>
+  
+
+</section>
+
+
+<script src={%static "js/detailscript.js"%}></script>
+
+{% endblock %}
+
+<!-- <table class="table">
+  <thead>
+      <tr>
+          <th>Prioridad</th>
+          <th>Estado</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{ bug.prioridad }}</td>
+          <td>{{ bug.estado }}</td>
+      </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+      <tr>
+          <th>Descripción</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{ bug.descripcion }}</td>
+      </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+      <tr>
+          <th>Proyecto</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{ proyecto.nombre_proyecto }}</td>
+      </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+      <tr>
+          <th>Programador</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>{{ programador.username }}</td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+<div class="text">Avances</div>
+{%if avance%}
+<table class="table">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>Titulo</th>
+          <th>Descripción</th>
+          <th>Fecha</th>
+      </tr>
+  </thead>
+  <tbody>
+      {% for Avance in avance %}
+      <tr>
+          <td>{{ Avance.id_reporte }}</td>
+          <td>{{ Avance.titulo }}</td>
+          <td>{{ Avance.descripcion }}</td>
+          <td>{{ Avance.fecha_avance | naturaltime }}</td>
+      </tr>
+      {%endfor%}
+  </tbody>
+</table>
+{% else %}
+<div class="text">No hay avances disponibles</div>
+{% endif %} -->

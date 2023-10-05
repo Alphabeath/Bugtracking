@@ -1,0 +1,206 @@
+{% extends 'home/base.html' %} {%load static%} {% load humanize %} {% block content %}
+
+<link rel="stylesheet" href='{%static "css/buglist.css"%}'>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<section class="home">
+  <div class="titulo">
+    <div class="text">Lista de bugs</div>
+  </div>
+  
+  <div class="container-table">
+    <div class="table-data">
+      <div class="order">
+        <div class="head">
+          <h3>Errores</h3>
+          <a href="www.google.cl"><i class='bx bx-search'></i></a>
+          <i class='bx bx-filter'></i>
+        </div>
+        <table id="bug-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Proyecto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if bug_page_obj %}
+            {% for Bug in bug_page_obj %}
+            <tr onclick="window.location.href = '{% url 'detail:index' Bug.id_bug %}';">
+              <td>
+                {{ Bug.id_bug }}
+                <img src={%static "images/logo.png"%}>
+              </td>
+              <td>
+                <p>{{ Bug.titulo | truncatechars:90 }}</p>
+              </td>
+              <td>{{ Bug.fecha_reporte | naturaltime}}</td>
+              {%if Bug.estado == "('ASIGNADO', 'bug recien asignado')"%}
+              <td><span class="status process">Asignado</span></td>
+              {%endif%}
+              {%if Bug.estado == "('SOLUCIONADO', 'bug solucionado')"%}
+              <td><span class="status completed">Solucionado</span></td>
+              {%endif%}
+              {%if Bug.estado == "('EN PROCESO', 'bug esta proceso de revisión')"%}
+              <td><span class="status pending">En proceso</span></td>
+              {%endif%}
+              <td>{{ Bug.id_proyecto }}</td>
+            </tr>
+            {%endfor%}
+            {%else%}
+            <tr>
+              <td>No hay errores disponibles</p>
+            </tr>
+            {%endif%}
+          </tbody>
+        </table>
+        <div class="pagination-container">
+          <div class="pagination bug-pagination">
+            <span class="step-links">
+              {% if bug_page_obj.has_previous %}
+              <a href="#" onclick="loadBugPage(1, event)">&laquo;</a>
+              <a href="#" onclick="loadBugPage({{ bug_page_obj.previous_page_number }}, event)">&lsaquo;</a>
+              {% endif %}
+
+              <span class="page-numbers">
+                {% for num in bug_page_obj.adjusted_elided_pages %}
+                  {% if num == bug_page_obj.number %}
+                    <span class="current-page" id="bug-current-page">{{ num }}</span>
+                  {% elif num == bug_page_obj.paginator.ELLIPSIS %}
+                    <span class="ellipsis">...</span>
+                  {% else %}
+                    <a href="#" onclick="loadBugPage({{ num }}, event)">{{ num }}</a>
+                  {% endif %}
+                {% endfor %}
+              </span>
+
+              {% if bug_page_obj.has_next %}
+              <a href="#" onclick="loadBugPage({{ bug_page_obj.next_page_number }}, event)">&rsaquo;</a>
+              <a href="#" onclick="loadBugPage({{ bug_page_obj.paginator.num_pages }}, event)">&raquo;</a>
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="titulo">
+    <div class="text">Lista de reportes</div>
+  </div>
+
+  <div class="container-table">
+    <div class="table-data" style="margin-bottom: 2em;">
+      <div class="order">
+        <div class="head">
+          <h3>Reportes</h3>
+          
+          <a href="www.google.cl"><i class='bx bx-search'></i></a>
+          <i class='bx bx-filter'></i>
+        </div>
+        <table id="report-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Fecha</th>
+              <th>Proyecto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if report_page_obj %}
+            <tr>
+              {% for ReporteBug in report_page_obj %}
+              <td>
+                <p>{{ ReporteBug.id_reporte }}</p>
+                <img src={%static "images/logo.png"%}>
+              </td>
+              <td>{{ ReporteBug.titulo | truncatechars:90 }}</td>
+              <td>{{ ReporteBug.fecha_reporte | naturaltime }}</td>
+              <td>{{ ReporteBug.id_proyecto.nombre_proyecto }}</td>
+            </tr>
+              {%endfor%}
+            {%else%}
+            <tr>
+              <td>No hay errores disponibles</p>
+            </tr>
+            {%endif%}
+          </tbody>
+        </table>
+        <div class="pagination-container">
+          <div class="pagination report-pagination">
+            <span class="step-links">
+              {% if report_page_obj.has_previous %}
+                <a href="#" onclick="loadReportPage(1, event)">&laquo;</a>
+                <a href="#" onclick="loadReportPage({{ report_page_obj.previous_page_number }}, event)">&lsaquo;</a>
+              {% endif %}
+              
+              <span class="page-numbers">
+                {% for num in report_page_obj.adjusted_elided_pages %}
+                  {% if num == report_page_obj.number %}
+                    <span class="current-page" id="report-current-page">{{ num }}</span>
+                  {% elif num == report_page_obj.paginator.ELLIPSIS %}
+                    <span class="ellipsis">...</span>
+                  {% else %}
+                    <a href="#" onclick="loadReportPage({{ num }}, event)">{{ num }}</a>
+                  {% endif %}
+                {% endfor %}
+              </span>
+          
+              {% if report_page_obj.has_next %}
+                <a href="#" onclick="loadReportPage({{ report_page_obj.next_page_number }}, event)">&rsaquo;</a>
+                <a href="#" onclick="loadReportPage({{ report_page_obj.paginator.num_pages }}, event)">&raquo;</a>
+              {% endif %}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+  // Función para cargar la página de bugs a través de AJAX
+  function loadBugPage(pageNumber, event) {
+    event.preventDefault();
+    var bugListUrl = "{% url 'buglist:bug_list_pagination' %}?bug_page=" + pageNumber;
+
+    $.ajax({
+      url: bugListUrl,
+      success: function(data) {
+        // Actualizar el contenido de la tabla de bugs y la paginación
+        var bugTable = $(data).find('#bug-table');
+        var bugPagination = $(data).find('.bug-pagination');
+        $('#bug-table').replaceWith(bugTable);
+        $('.bug-pagination').replaceWith(bugPagination);
+      }
+    });
+  }
+
+  // Función para cargar la página de reportes a través de AJAX
+  function loadReportPage(pageNumber, event) {
+    event.preventDefault();
+    var reportListUrl = "{% url 'buglist:report_list_pagination' %}?report_page=" + pageNumber;
+
+    $.ajax({
+      url: reportListUrl,
+      success: function(data) {
+        // Actualizar el contenido de la tabla de reportes y la paginación
+        var reportTable = $(data).find('#report-table');
+        var reportPagination = $(data).find('.report-pagination');
+        $('#report-table').replaceWith(reportTable);
+        $('.report-pagination').replaceWith(reportPagination);
+      }
+    });
+  }
+
+  
+  </script>
+</section>
+
+{% endblock %}

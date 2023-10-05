@@ -1,0 +1,266 @@
+{% extends 'home/base.html' %} {%load static%} {% block content %} {% load humanize %}
+
+<link rel="stylesheet" href='{%static "css/start.css"%}'>
+
+<section class="home">
+  {%if request.user.is_authenticated%}
+  <div class="text" style="text-align: center;">Bienvenido {{request.user.username | title}}</div>
+
+  <ul class="box-info">
+    <li>
+      <i class='bx bxs-calendar-check'></i>
+      <span class="text">
+        <h3>{{reportes_solucionados}}</h3>
+        <p>de tus errores se han resuelto</p>
+      </span>
+    </li>
+    <li>
+      <i class='bx bxs-group'></i>
+      <span class="text">
+        <h3>{{reportes_asignados}}</h3>
+        <p>de tus errores están asignados</p>
+      </span>
+    </li>
+    <li>
+      <i class='bx bxs-dollar-circle'></i>
+      <span class="text">
+        <h3>{{reportes_enproceso}}</h3>
+        <p>de tus errores se están viendo</p>
+      </span>
+    </li>
+  </ul>
+  <div class="container-table">
+    <div class="table-data" style="margin-bottom: 2em;">
+      <div class="order">
+        <div class="head">
+          <h3>Bandeja de notificaciones</h3>
+          
+          <!-- <a href="www.google.cl"><i class='bx bx-search'></i></a>
+          <i class='bx bx-filter'></i> -->
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Mensaje</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td>
+                <p>0</p>
+              </td>
+              <td>
+                <p>No hay notificaciones</p>
+              </td>
+            
+            </tr>
+
+            <!-- <tr>
+              <td>No hay errores disponibles</p>
+            </tr> -->
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container-table">
+    <div class="table-data" style="margin-bottom: 2em;">
+      <div class="order">
+        <div class="head">
+          <h3>Tus reportes enviados</h3>
+          
+          <a href="www.google.cl"><i class='bx bx-search'></i></a>
+          <i class='bx bx-filter'></i>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Fecha</th>
+              <th>Proyecto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if reportes_usuario %}
+            <tr>
+              {% for ReporteBug in reportes_usuario %}
+              <td>
+                <p>{{ ReporteBug.id_reporte }}</p>
+                <img src={%static "images/logo.png"%}>
+              </td>
+              <td>{{ ReporteBug.titulo | truncatechars:90 }}</td>
+              <td>{{ ReporteBug.fecha_reporte }}</td>
+              <td>{{ ReporteBug.id_proyecto.nombre_proyecto }}</td>
+            </tr>
+              {%endfor%}
+            {%else%}
+            <tr>
+              <td>No hay errores disponibles</p>
+            </tr>
+            {%endif%}
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="text" style="text-align: center;">
+      {%if request.user.is_superuser%}
+      Hemos detectado que eres administrador, te recomendamos utilizar el panel de administración
+      {%endif%}
+    </div>
+  </footer>
+
+
+
+
+
+
+
+  {%else%}
+  <div class="parallax">
+    <div class="text">Inicio</div>
+    <p>Bienvenido a la plataforma de seguimiento de errores de IS2</p>
+    <a href="signup">Registrarme</a>
+  </div>
+  <div class="info-view">
+      <div class="box">
+        <h2>Últimos reportes</h2>
+        {% if listar_reportes %}
+        <table class="table"> 
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Título</th>
+                  <th>Fecha</th>
+                  <th>Proyecto</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for ReporteBug in listar_reportes %}
+              <tr>
+                <td>{{ ReporteBug.id_reporte }}</td>
+                <td>{{ ReporteBug.titulo | truncatechars:30 }}</td>
+                <td>{{ ReporteBug.fecha_reporte | naturaltime }}</td>
+                <td>{{ ReporteBug.id_proyecto.nombre_proyecto }}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+        </table>
+        {% else %}
+        <table class="table"> 
+          <thead>
+              <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Prioridad</th>
+                <th>Estado</th>
+                <th>Proyecto</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td colspan="4" style="text-align: center">No hay errores disponibles</td>
+              </tr>
+            </tbody>
+      </table>
+      {% endif %}
+    </div>
+
+
+
+
+
+
+      <div class="box">
+        <div class="text-info">
+          <h3>Hemos resuelto más de {{total_bug}} errores</h3>
+        </div>
+      </div>
+      
+      <div class="box">
+        <div class="text-info">
+          <h3>Hemos recibido más de {{total_report}} reportes</h3>
+        </div>
+      </div>
+      <div class="box">
+        <h2>Últimos errores</h2>
+        {% if listar_bug %}
+        <table class="table"> 
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Título</th>
+                  <th>Fecha</th>
+                  <th>Proyecto</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for Bug in  listar_bug%}
+              <tr>
+                  <td>{{ Bug.id_bug }}</td>
+                  <td>{{ Bug.titulo | truncatechars:30 }}</td>
+                  <td>{{ Bug.fecha_reporte | naturaltime }}</td>
+                  <td>{{ Bug.id_proyecto.nombre_proyecto }}</td>
+              </tr>
+              {%endfor%}
+              </tbody>
+        </table>
+        {% else %}
+        <table class="table"> 
+          <thead>
+              <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Prioridad</th>
+                <th>Estado</th>
+                <th>Proyecto</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td colspan="4" style="text-align: center">No hay reportes disponibles</td>
+              </tr>
+            </tbody>
+      </table>
+      {% endif %}
+    </div>
+  </div>
+  <div class="parallax second">
+    <div class="item">
+      <div class="img img-first"></div>
+      <div class="card">
+        <h2>Lista de bugs</h2>
+        <p>Revisa todos los bugs en los que estamos trabajando</p>
+        <a href="{% url 'buglist:bug_list' %}">Ir a la buglist</a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img img-second"></div>
+      <div class="card">
+        <h2>Reportar bug</h2>
+        <p>Avísanos de un bug en alguno de los proyectos</p>
+        <a href="{% url 'report:reportar_bug' %}">Reportar</a>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img img-third"></div>
+      <div class="card">
+        <h2>Iniciar sesión</h2>
+        <p>
+          Accede a tu cuenta para obtener más información sobre tus reportes
+        </p>
+        <a href="#">Iniciar sesión</a>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+
+</section>
+{% endblock %}

@@ -1,0 +1,271 @@
+.info-view {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.info-view .table {
+    width: 100%
+}
+
+.info-view .box {
+
+    align-items: center;
+    min-width: 290px;
+    width: 40%;
+    height: 300px;
+    background-color: transparent;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.info-view h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.info-view .box .table {
+    margin: auto;
+    position: relative;
+    left: 0px;
+}
+
+.info-view .box .text-info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+.info-view .box h3 {
+    text-align: center;
+    color: var(--title-color);
+    text-shadow: 20px 20px 20px var(--shadow-box);
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-img-top{
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+}
+
+
+/* Estilos generales del modal */
+.modal {
+    display: none; /* Ocultar el modal de forma predeterminada */
+    position: fixed; /* Posición fija para que aparezca en la ventana del navegador */
+    z-index: 9999; /* Z-index alto para asegurar que el modal esté en la parte superior */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilitar desplazamiento si el contenido del modal es demasiado largo */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  }
+  
+  /* Estilos del contenido del modal */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Centrar verticalmente y dejar espacio en los bordes */
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 600px; /* Ancho máximo del modal */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Estilos para el botón de cierre */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Estilos para la imagen del modal */
+  .modal-img {
+    width: 100%;
+    height: auto;
+    max-height: 500px; /* Altura máxima de la imagen */
+    object-fit: contain; /* Ajustar imagen al contenedor */
+  }
+  
+  /* Estilos para la leyenda del modal */
+  .modal-caption {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* Contenido */
+
+  .modulo {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    background: var(--sidebar-color);
+    min-width: 1000px; /* Ajusta el valor según tus necesidades */
+    max-width: 1000px;
+    margin: 0 auto; /* Centra el div horizontalmente */
+    height: auto; /* Permite ajuste automático del alto */
+    width: fit-content;
+  }
+  
+  .titulo {
+    color: var(--text-color);
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .contenido {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .text-1,
+  .text-2,
+  .text-estado {
+    color: var(--text-color);
+    padding: 3px 20px;
+  }
+  
+  .text-2{
+    font-weight: 250;
+  }
+  
+  .text-usuario{
+    color: var(--text-color);
+    padding: 3px 3px;
+    font-weight: bold;
+  }
+
+  .subido{
+    color: var(--text-color);
+    padding: 3px 3px;
+  }
+
+  .fecha{
+    color: var(--text-color);
+    padding: 3px 5px;
+  }
+
+  .titulo-1{
+    padding: 0px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+  
+  .item.ajustado {
+    margin-right: 20px; /* Añadimos un margen derecho para separar los elementos */
+  }
+  
+
+  .descripcion {
+    display: flex;
+    flex-direction: column;
+    margin: 1px;
+  }
+  
+  .descripcion .text-1 {
+    margin: 0;
+  }
+
+  .cambio {
+    margin-bottom: 10px;
+  }
+  
+  .separador {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+  .card {
+  width: 100%;
+  }
+
+  .card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  }
+
+  .contenido .item {
+    width: 150px; /* Ajusta el tamaño deseado para las imágenes */
+    margin-right: 10px; /* Ajusta el margen derecho deseado entre las imágenes */
+  }
+  
+  .contenido .item .card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .reporte{
+    margin-bottom: 10px;
+  }
+
+  .id-fecha {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .id-fecha .text-1 {
+    margin-right: 5px; /* Espacio entre ID y fecha */
+  }
+  
+  
+  
+  

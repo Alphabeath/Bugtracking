@@ -1,0 +1,251 @@
+
+:root{
+    --light: #F9F9F9;
+	--blue: #3C91E6;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--dark-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+    --green: #006400;
+    --light-green: #B3E6B5;
+
+}
+
+.parallax {
+    text-align: center;
+    width: 100%;
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(https://www.xtrafondos.com/wallpapers/montanas-en-el-bosque-lleno-de-nieve-6020.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.parallax .text{
+    color: white;
+}
+.parallax p {
+    max-width: 60ch;
+    line-height: 1.5;
+    padding: 1em;
+    color: white;
+}
+
+.parallax a {
+    display: inline-block;
+    padding: 1em 3.5em;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 0.3em;
+    font-weight: 700;
+    letter-spacing: .5px;
+    font-size: .875rem;
+}
+
+.blank,
+.other,
+.info-view {
+    width: 100%;
+    height: auto;
+    background-color: var(--body-color);
+
+}
+
+.info-view {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.info-view .table {
+    width: 100%
+}
+
+.info-view .box {
+
+    align-items: center;
+    min-width: 290px;
+    width: 40%;
+    height: 300px;
+    background-color: transparent;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.info-view h2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.info-view .box .table {
+    margin: auto;
+    position: relative;
+    left: 0px;
+}
+
+.info-view .box .text-info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+.info-view .box h3 {
+    text-align: center;
+    color: var(--title-color);
+    text-shadow: 20px 20px 20px var(--shadow-box);
+}
+
+
+
+.second {
+    background-image: url(https://images.unsplash.com/photo-1514496959998-c01c40915c5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80);
+    background-attachment: fixed;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 1.6em;
+
+}
+
+.second p{
+    color: var(--text-color);
+}
+
+.second .item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 310px;
+    height: 360px;
+    background-color: var(--body-color);
+    margin: 20px;
+    box-sizing: border-box;
+    border-radius: 0.4em;
+    -webkit-box-shadow: 0px 29px 38px -15px rgba(0, 0, 0, 0.43);
+    -moz-box-shadow: 0px 29px 38px -15px rgba(0, 0, 0, 0.43);
+    box-shadow: 0px 29px 38px -15px rgba(0, 0, 0, 0.43);
+
+}
+
+.second text nav-text {
+    margin-top: 3em;
+    text-align: center;
+    text-size-adjust: auto;
+
+}
+
+.second .card>a {
+    margin-bottom: 2em;
+}
+
+@media screen and (max-width<=1200) and (max-width>=300px) {
+    .second .item {
+        width: 310px;
+    }
+}
+
+
+
+
+
+.parallax .img {
+    width: 90%;
+    height: 200px;
+    background-color: lightgrey;
+    background-size: cover;
+    background-position: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-radius: .3em;
+    ;
+}
+
+.img-first {
+    background-image: url(https://w0.peakpx.com/wallpaper/582/516/HD-wallpaper-linux-programmer-pixel-art-linux-computer-hacker-pixel-8-bit.jpg);
+}
+
+.img-second {
+    background-image: url(https://preview.redd.it/1d11s820dgm91.gif?width=640&crop=smart&format=png8&s=a18429691d6b7fe12b301d21a292643b604e2679);
+}
+
+.img-third {
+    background-image: url(https://preview.redd.it/newspaper-pixilart-is-the-software-i-use-and-an-online-v0-t3ccxihfxiia1.png?width=1080&crop=smart&auto=webp&v=enabled&s=d297b9d74d3e3601ef4817d84d61990de85f4f7f);
+}
+
+
+
+
+/* VISTA DE USUARIO REGISTRADO */
+
+.box-info {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-gap: 24px;
+	margin-top: 20px;
+	margin-left: 5%;
+    margin-bottom: 2rem;
+	/* width: 90%; */
+	margin-right: 5%;
+	/* justify-content: center; */
+}
+
+.box-info li {
+	/* padding: 20px; */
+	/* padding-right: 24px; */
+	/* padding-left: 24px; */
+	background: var(--sidebar-color);
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	grid-gap: 24px;
+}
+
+.box-info li .bx {
+	width: 140px;
+	height: 120px;
+	border-radius: 10px;
+	font-size: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.box-info .text{
+    font-size: 20px;
+}
+.box-info li:nth-child(1) .bx {
+	background: var(--light-green);
+	color: var(--green);
+}
+
+.box-info li:nth-child(2) .bx {
+	background: var(--light-yellow);
+	color: var(--yellow);
+}
+
+.box-info li:nth-child(3) .bx {
+	background: var(--light-orange);
+	color: var(--orange);
+}
