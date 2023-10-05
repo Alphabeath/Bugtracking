@@ -1,5 +1,4 @@
-# Proyecto Fundamentos de Testing y aseguramiento de calidad
-grupo 4
+# Plataforma de seguimiento de errores
 
 ### Requisitos previos:
 Se debe tener instalado o instalar postgresql.
